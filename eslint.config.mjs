@@ -42,7 +42,6 @@ export default defineConfig([
     ignores: [
       'node_modules/',
       'dist/',
-      'documentation/build/',
       '.yarn/',
       '**/*.d.ts',
     ],

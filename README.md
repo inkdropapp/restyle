@@ -40,15 +40,6 @@ npx expo install @shopify/restyle
 
 See [Usage](https://shopify.github.io/restyle/#usage) in the documentation.
 
-## Running the Documentation site locally
-
-To run the Documentation site locally, please follow the steps below:
-
-1. `cd documentation`
-2. `yarn`
-3. `yarn start`
-4. Go to http://localhost:3000/restyle/
-
 ## Migrating to restyle v2
 
 Read more about migration to v2 [here](https://shopify.github.io/restyle/guides/migrating-to-v2)

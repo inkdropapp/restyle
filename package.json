@@ -12,8 +12,7 @@
     "lint": "eslint '**/*.{ts,tsx}' && yarn typecheck",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.test.json",
     "lint-fix": "eslint --fix '**/*.{ts,tsx}'",
-    "prepublishOnly": "yarn run build",
-    "deploy:documentation": "gh-pages -d documentation/build"
+    "prepublishOnly": "yarn run build"
   },
   "publishConfig": {
     "access": "public",
@@ -37,7 +36,6 @@
     "@types/react-test-renderer": "^19.3.0",
     "eslint": "^9.39.5",
     "eslint-plugin-prettier": "^5.5.6",
-    "gh-pages": "^5.0.0",
     "jest": "^30.3.0",
     "prettier": "^3.9.6",
     "react": "19.3.0",
