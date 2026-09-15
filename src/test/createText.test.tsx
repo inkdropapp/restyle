@@ -1,10 +1,12 @@
 import React from 'react';
-import {create as render} from 'react-test-renderer';
 import {Text as RNText} from 'react-native';
+import {describe, it, expect} from '@jest/globals';
 
 import createTheme from '../createTheme';
 import createText from '../createText';
 import {ThemeProvider} from '../context';
+
+import {render} from './render';
 
 const palette = {
   black: '#000000',

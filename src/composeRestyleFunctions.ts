@@ -1,6 +1,7 @@
 import {StyleSheet, ViewStyle} from 'react-native';
 
 import {
+  Mutable,
   RestyleFunctionContainer,
   BaseTheme,
   Dimensions,
@@ -49,13 +50,13 @@ const composeRestyleFunctions = <
       dimensions: Dimensions | null;
     },
   ): RNStyle => {
-    const styles: ViewStyle = {};
+    const styles: Mutable<ViewStyle> = {};
     const options = {theme, dimensions};
     // We make the assumption that the props object won't have extra prototype keys.
-    // eslint-disable-next-line guard-for-in
+
     for (const key in props) {
       const mappedProps = funcsMap[key](props, options);
-      // eslint-disable-next-line guard-for-in
+
       for (const mappedKey in mappedProps) {
         styles[mappedKey as keyof ViewStyle] = mappedProps[mappedKey];
       }

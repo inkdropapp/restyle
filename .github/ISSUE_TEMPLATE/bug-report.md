@@ -25,7 +25,7 @@ Before you proceed:
 
 ## To Reproduce
 
-<!-- Please provide a way to reproduce the problem if it's possible. Use the fixture app to create an example that reproduces the bug and provide a link to a GitHub repository under your username. -->
+<!-- Please provide a way to reproduce the problem if it's possible. Please provide a link to a minimal reproduction in a GitHub repository under your username. -->
 
 ## Platform:
 

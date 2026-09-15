@@ -1,7 +1,12 @@
-import {TextStyle, FlexStyle, ViewStyle} from 'react-native';
+import {TextStyle, ViewStyle} from 'react-native';
 
 import createRestyleFunction from './createRestyleFunction';
-import {BaseTheme, ResponsiveValue, RNStyleProperty} from './types';
+import {
+  BaseTheme,
+  ResponsiveValue,
+  RNStyleProperty,
+  StyleValueOf,
+} from './types';
 import {getKeys} from './typeHelpers';
 
 const spacingProperties = {
@@ -14,6 +19,12 @@ const spacingProperties = {
   marginVertical: true,
   marginStart: true,
   marginEnd: true,
+  marginBlock: true,
+  marginBlockStart: true,
+  marginBlockEnd: true,
+  marginInline: true,
+  marginInlineStart: true,
+  marginInlineEnd: true,
   padding: true,
   paddingTop: true,
   paddingRight: true,
@@ -23,6 +34,12 @@ const spacingProperties = {
   paddingVertical: true,
   paddingStart: true,
   paddingEnd: true,
+  paddingBlock: true,
+  paddingBlockStart: true,
+  paddingBlockEnd: true,
+  paddingInline: true,
+  paddingInlineStart: true,
+  paddingInlineEnd: true,
   columnGap: true,
   rowGap: true,
   gap: true,
@@ -66,6 +83,7 @@ const typographyProperties = {
   textDecorationLine: true,
   textDecorationStyle: true,
   textTransform: true,
+  userSelect: true,
   verticalAlign: true,
   writingDirection: true,
 };
@@ -79,6 +97,10 @@ const layoutProperties = {
   maxHeight: true,
   overflow: true,
   aspectRatio: true,
+  boxSizing: true,
+  pointerEvents: true,
+  cursor: true,
+  backfaceVisibility: true,
   alignContent: true,
   alignItems: true,
   alignSelf: true,
@@ -99,6 +121,13 @@ const positionProperties = {
   left: true,
   start: true,
   end: true,
+  inset: true,
+  insetBlock: true,
+  insetBlockStart: true,
+  insetBlockEnd: true,
+  insetInline: true,
+  insetInlineStart: true,
+  insetInlineEnd: true,
 };
 
 const borderProperties = {
@@ -110,6 +139,7 @@ const borderProperties = {
   borderStartWidth: true,
   borderEndWidth: true,
   borderWidth: true,
+  borderCurve: true,
 };
 
 const borderRadiusProperties = {
@@ -122,6 +152,10 @@ const borderRadiusProperties = {
   borderBottomEndRadius: true,
   borderTopStartRadius: true,
   borderTopEndRadius: true,
+  borderStartStartRadius: true,
+  borderStartEndRadius: true,
+  borderEndStartRadius: true,
+  borderEndEndRadius: true,
 };
 
 const borderColorProperties = {
@@ -132,6 +166,10 @@ const borderColorProperties = {
   borderBottomColor: true,
   borderStartColor: true,
   borderEndColor: true,
+  borderBlockColor: true,
+  borderBlockStartColor: true,
+  borderBlockEndColor: true,
+  outlineColor: true,
 };
 
 const shadowProperties = {
@@ -139,6 +177,19 @@ const shadowProperties = {
   shadowOffset: true,
   shadowRadius: true,
   elevation: true,
+};
+
+const outlineProperties = {
+  outlineWidth: true,
+  outlineStyle: true,
+  outlineOffset: true,
+};
+
+const effectProperties = {
+  boxShadow: true,
+  filter: true,
+  mixBlendMode: true,
+  isolation: true,
 };
 
 const textShadowProperties = {
@@ -255,6 +306,18 @@ export const shadow = [
   }),
 ];
 
+export const outline = getKeys(outlineProperties).map(property => {
+  return createRestyleFunction({
+    property,
+  });
+});
+
+export const effects = getKeys(effectProperties).map(property => {
+  return createRestyleFunction({
+    property,
+  });
+});
+
 export const textShadow = [
   ...getKeys(textShadowProperties).map(property => {
     return createRestyleFunction({
@@ -279,6 +342,8 @@ export const all = [
   ...position,
   ...border,
   ...shadow,
+  ...outline,
+  ...effects,
   ...textShadow,
 ];
 
@@ -324,21 +389,21 @@ export type SpacingShorthandProps<Theme extends BaseTheme> = {
 
 export type TypographyProps<Theme extends BaseTheme> = {
   [Key in keyof typeof typographyProperties]?: ResponsiveValue<
-    TextStyle[Key],
+    StyleValueOf<TextStyle, Key>,
     Theme['breakpoints']
   >;
 };
 
 export type LayoutProps<Theme extends BaseTheme> = {
   [Key in keyof typeof layoutProperties]?: ResponsiveValue<
-    FlexStyle[Key],
+    StyleValueOf<ViewStyle, Key>,
     Theme['breakpoints']
   >;
 };
 
 export type PositionProps<Theme extends BaseTheme> = {
   [Key in keyof typeof positionProperties]?: ResponsiveValue<
-    FlexStyle[Key],
+    StyleValueOf<ViewStyle, Key>,
     Theme['breakpoints']
   >;
 } & {
@@ -350,7 +415,7 @@ export type PositionProps<Theme extends BaseTheme> = {
 
 export type BorderProps<Theme extends BaseTheme> = {
   [Key in keyof typeof borderProperties]?: ResponsiveValue<
-    ViewStyle[Key],
+    StyleValueOf<ViewStyle, Key>,
     Theme['breakpoints']
   >;
 } & {
@@ -367,16 +432,30 @@ export type BorderProps<Theme extends BaseTheme> = {
 
 export type ShadowProps<Theme extends BaseTheme> = {
   [Key in keyof typeof shadowProperties]?: ResponsiveValue<
-    ViewStyle[Key],
+    StyleValueOf<ViewStyle, Key>,
     Theme['breakpoints']
   >;
 } & {
   shadowColor?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>;
 };
 
+export type OutlineProps<Theme extends BaseTheme> = {
+  [Key in keyof typeof outlineProperties]?: ResponsiveValue<
+    StyleValueOf<ViewStyle, Key>,
+    Theme['breakpoints']
+  >;
+};
+
+export type EffectProps<Theme extends BaseTheme> = {
+  [Key in keyof typeof effectProperties]?: ResponsiveValue<
+    StyleValueOf<ViewStyle, Key>,
+    Theme['breakpoints']
+  >;
+};
+
 export type TextShadowProps<Theme extends BaseTheme> = {
   [Key in keyof typeof textShadowProperties]?: ResponsiveValue<
-    TextStyle[Key],
+    StyleValueOf<TextStyle, Key>,
     Theme['breakpoints']
   >;
 } & {
@@ -397,4 +476,6 @@ export type AllProps<Theme extends BaseTheme> = BackgroundColorProps<Theme> &
   PositionProps<Theme> &
   BorderProps<Theme> &
   ShadowProps<Theme> &
+  OutlineProps<Theme> &
+  EffectProps<Theme> &
   TextShadowProps<Theme>;

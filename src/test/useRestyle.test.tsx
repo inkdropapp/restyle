@@ -1,9 +1,10 @@
 import React from 'react';
 import {View} from 'react-native';
-import {create as render} from 'react-test-renderer';
+import {describe, it, expect} from '@jest/globals';
 
 import {ThemeProvider} from '../context';
 
+import {render} from './render';
 import {Button} from './TestButton';
 import {Container, theme} from './TestContainer';
 

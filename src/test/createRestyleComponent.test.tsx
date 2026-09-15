@@ -1,6 +1,6 @@
 import React from 'react';
-import {create as render} from 'react-test-renderer';
 import {View, ViewProps} from 'react-native';
+import {describe, it, expect, beforeEach, jest} from '@jest/globals';
 
 import createRestyleComponent from '../createRestyleComponent';
 import {
@@ -15,6 +15,8 @@ import {
 } from '../restyleFunctions';
 import {ThemeProvider} from '../context';
 import createVariant, {VariantProps} from '../createVariant';
+
+import {render} from './render';
 
 const theme = {
   colors: {
@@ -125,6 +127,7 @@ describe('createRestyleComponent', () => {
       expect(root.findByType(View).props).toStrictEqual({
         style: [{opacity: 0.5}],
         pointerEvents: 'auto',
+        ref: null,
       });
     });
 
@@ -136,6 +139,7 @@ describe('createRestyleComponent', () => {
       );
       expect(root.findByType(View).props).toStrictEqual({
         style: [{backgroundColor: '#FFE6E4'}],
+        ref: null,
       });
     });
 
@@ -147,8 +151,9 @@ describe('createRestyleComponent', () => {
       );
       expect(root.findByType(View).props).toStrictEqual({
         style: [{opacity: 0.5}],
+        ref: null,
       });
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 0));
     });
 
     it('renders with tablet-specific style when dimensions are bigger', async () => {
@@ -160,12 +165,13 @@ describe('createRestyleComponent', () => {
       );
       expect(root.findByType(View).props).toStrictEqual({
         style: [{opacity: 0.8}],
+        ref: null,
       });
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 0));
     });
 
     it('forwards refs', () => {
-      const spy = jest.fn();
+      const spy = jest.fn<(instance: unknown) => void>();
       render(
         <ThemeProvider theme={theme}>
           <Component ref={spy} testID="RENDERED_COMPONENT" />
@@ -217,6 +223,7 @@ describe('createRestyleComponent', () => {
       );
       expect(root.findByType(View).props).toStrictEqual({
         style: [{gap: 8, columnGap: 8, rowGap: 8}],
+        ref: null,
       });
     });
 
@@ -228,6 +235,7 @@ describe('createRestyleComponent', () => {
       );
       expect(root.findByType(View).props).toStrictEqual({
         style: [{gap: 8, columnGap: 8, rowGap: 8}],
+        ref: null,
       });
     });
   });
