@@ -1,9 +1,9 @@
 module.exports = {
   verbose: true,
-  preset: 'react-native',
-  testEnvironment: 'node',
+  preset: '@react-native/jest-preset',
   testMatch: ['<rootDir>/src/test/**/*.(test|spec).(ts|tsx|js)'],
-  transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!((jest-)?react-native|@react-native(-community)?)/)',
-  ],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testEnvironmentOptions: {
+    customExportConditions: ['require', 'react-native'],
+  },
 };

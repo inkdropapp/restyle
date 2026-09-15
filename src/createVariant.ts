@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 
 import {
   BaseTheme,
@@ -59,15 +59,14 @@ function createVariant<
       : {};
 
     if (!expandedProps && !defaults && !variantDefaults) return {};
-    return StyleSheet.flatten(
-      allRestyleFunctions.buildStyle(
-        {...defaults, ...variantDefaults, ...expandedProps},
-        {
-          theme,
-          dimensions,
-        },
-      ),
-    );
+    const style = allRestyleFunctions.buildStyle(
+      {...defaults, ...variantDefaults, ...expandedProps},
+      {
+        theme,
+        dimensions,
+      },
+    ) as ViewStyle;
+    return StyleSheet.flatten(style) ?? {};
   };
   return {
     property,

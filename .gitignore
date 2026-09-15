@@ -11,3 +11,14 @@ dist
 .idea
 
 tsconfig.tsbuildinfo
+
+# Yarn — keep the committed release, ignore caches and generated state
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+yarn-debug.log
+yarn-error.log

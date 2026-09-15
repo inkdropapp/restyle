@@ -1,3 +1,5 @@
+import {describe, it, expect} from '@jest/globals';
+
 import createRestyleFunction from '../createRestyleFunction';
 import {RNStyle} from '../types';
 

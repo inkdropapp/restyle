@@ -3,7 +3,6 @@
 <div align="center">
 <a href="https://shopify.github.io/restyle/">Getting started</a> •
 <a href="https://shopify.github.io/restyle/#installation">Installation</a> •
-<a href="https://github.com/Shopify/restyle/tree/master/fixture">Playground</a> •
 <a href="https://discord.gg/k2gzABTfav">Discord</a>
 </br></br>
 
@@ -39,20 +38,7 @@ npx expo install @shopify/restyle
 
 ## Usage
 
-See [Usage](https://shopify.github.io/restyle/#usage) in the documentation, or see below for the fixture app.
-
-## App / Playground
-
-The [fixture](https://github.com/Shopify/restyle/tree/master/fixture) is an example app to showcase the library's usage.
-
-## Running the Documentation site locally
-
-To run the Documentation site locally, please follow the steps below:
-
-1. `cd documentation`
-2. `yarn`
-3. `yarn start`
-4. Go to http://localhost:3000/restyle/
+See [Usage](https://shopify.github.io/restyle/#usage) in the documentation.
 
 ## Migrating to restyle v2
 

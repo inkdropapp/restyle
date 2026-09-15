@@ -6,25 +6,19 @@ import {position, PositionProps} from '../restyleFunctions';
 import createVariant, {VariantProps} from '../createVariant';
 import composeRestyleFunctions from '../composeRestyleFunctions';
 
-const theme = {
-  colors: {},
-  spacing: {},
-  buttonVariants: {
-    defaults: {},
-  },
-  breakpoints: {
-    phone: 0,
-    tablet: 376,
-  },
-  zIndices: {
-    phone: 5,
-  },
+type Theme = {
+  colors: {};
+  spacing: {};
+  buttonVariants: {defaults: {}};
+  breakpoints: {phone: number; tablet: number};
+  zIndices: {phone: number};
 };
-type Theme = typeof theme;
+
+type TouchableProps = ComponentPropsWithoutRef<typeof TouchableOpacity>;
 
 type Props = VariantProps<Theme, 'buttonVariants'> &
   PositionProps<Theme> &
-  ComponentPropsWithoutRef<typeof TouchableOpacity>;
+  Omit<TouchableProps, 'style'>;
 
 const restyleFunctions = [
   position,
@@ -38,7 +32,7 @@ const composedRestyleFunction = composeRestyleFunctions<Theme, Props>(
 export function Button({title, ...rest}: Props & {title: string}) {
   const props = useRestyle(composedRestyleFunction, rest);
   return (
-    <TouchableOpacity {...props}>
+    <TouchableOpacity {...(props as TouchableProps)}>
       <Text>{title}</Text>
     </TouchableOpacity>
   );

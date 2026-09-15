@@ -26,8 +26,7 @@ export type AtLeastOneResponsiveValue<
   R[keyof R];
 
 export type ResponsiveValue<Value, B extends BaseTheme['breakpoints']> =
-  | Value
-  | AtLeastOneResponsiveValue<Value, B>;
+  Value | AtLeastOneResponsiveValue<Value, B>;
 
 export type SafeVariants<T> = Omit<T, keyof KnownBaseTheme>;
 
@@ -89,9 +88,15 @@ export type RNStyle =
   | ImageStyle
   | ((...args: any[]) => StyleProp<ViewStyle>);
 
+export type Mutable<T> = {
+  -readonly [Key in keyof T]: T[Key];
+};
+
 export type RNStyleProperty =
-  | keyof ViewStyle
-  | keyof TextStyle
-  | keyof ImageStyle;
+  keyof ViewStyle | keyof TextStyle | keyof ImageStyle;
+
+export type StyleValueOf<S, Key extends PropertyKey> = Key extends keyof S
+  ? S[Key]
+  : never;
 
 export type PropValue = string | number | undefined | null;

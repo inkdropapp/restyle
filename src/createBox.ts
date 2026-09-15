@@ -11,6 +11,8 @@ import {
   spacing,
   border,
   shadow,
+  outline,
+  effects,
   position,
   BackgroundColorProps,
   OpacityProps,
@@ -18,6 +20,8 @@ import {
   SpacingProps,
   BorderProps,
   ShadowProps,
+  OutlineProps,
+  EffectProps,
   PositionProps,
   visible,
   VisibleProps,
@@ -33,6 +37,8 @@ type BaseBoxProps<Theme extends BaseTheme> = BackgroundColorProps<Theme> &
   SpacingProps<Theme> &
   BorderProps<Theme> &
   ShadowProps<Theme> &
+  OutlineProps<Theme> &
+  EffectProps<Theme> &
   PositionProps<Theme>;
 
 export type BoxProps<
@@ -54,6 +60,8 @@ export const boxRestyleFunctions = [
   spacingShorthand,
   border,
   shadow,
+  outline,
+  effects,
   position,
 ];
 

@@ -17,8 +17,8 @@ const createRestyleComponent = <
 ) => {
   const composedRestyleFunction = composeRestyleFunctions(restyleFunctions);
 
-  const RestyleComponent = React.forwardRef((props: Props, ref) => {
-    const passedProps = useRestyle(composedRestyleFunction, props);
+  const RestyleComponent = React.forwardRef<unknown, Props>((props, ref) => {
+    const passedProps = useRestyle(composedRestyleFunction, props as Props);
     return <BaseComponent ref={ref} {...passedProps} />;
   });
   type RestyleComponentType = typeof RestyleComponent;
